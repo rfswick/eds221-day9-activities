@@ -51,7 +51,7 @@ mack_creek_lengths <- mack_creek_vertebrates %>%
 ```
 
 ```{r}
-# Example 1: 
+# reprex 
 
 datapasta::df_paste(head(mack_creek_vertebrates, 10)[,c("length1", "species", "year")])
 
@@ -98,5 +98,35 @@ mack_creek_vertebrates %>%
          labs(x = "Cutthroat trout length (cm)",
               y = "Weight (g)")
 ```
+
+```{r}
+#reprex
+
+datapasta::df_paste(head(mack_creek_vertebrates, 10)[,c("length1", "species", "weight")])
+
+
+mack_creek <- data.frame(
+  stringsAsFactors = FALSE,
+                                    length1 = c(58,61,89,
+                                                58,93,86,107,131,103,117),
+                                    species = c("ONCL",
+                                                "ONCL","ONCL","ONCL","ONCL",
+                                                "ONCL","ONCL","ONCL","ONCL",
+                                                "ONCL"),
+                                     weight = c(1.75,1.95,
+                                                5.6,2.15,6.9,5.9,10.5,20.6,
+                                                9.55,13)
+               )
+
+mack_creek %>% 
+  clean_names() %>% 
+  filter(species == "ONCL") |>
+  ggplot(aes(x = length1, y = weight)) +
+         geom_point(aes(shape = 12), color = "purple") +
+         theme_minimal() +
+         labs(x = "Cutthroat trout length (cm)",
+              y = "Weight (g)")
+```
+
 
 ## End
